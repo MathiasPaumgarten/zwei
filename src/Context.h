@@ -5,6 +5,8 @@
 #include <vector>
 
 #include "cinder/Color.h"
+#include "cinder/gl/draw.h"
+#include "cinder/gl/Context.h"
 
 #include "BoundingBox.h"
 

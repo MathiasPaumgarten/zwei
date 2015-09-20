@@ -2,6 +2,8 @@
 #define __Zwei__BoundingBox__
 
 #include <stdio.h>
+#include <algorithm>
+
 #include "cinder/Vector.h"
 
 namespace zwei {

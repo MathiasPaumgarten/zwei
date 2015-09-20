@@ -1,5 +1,4 @@
 #include "Stage.h"
-#include "cinder/gl/Context.h"
 
 void zwei::Stage::draw() {
     cinder::gl::clear( backgroundColor );

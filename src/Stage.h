@@ -5,6 +5,7 @@
 
 #include "cinder/app/App.h"
 #include "cinder/Color.h"
+#include "cinder/gl/Context.h"
 
 #include "Container.h"
 #include "MouseEvent.h"
