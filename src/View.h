@@ -1,23 +1,18 @@
-//
-//  View.h
-//  Zwei
-//
-//  Created by roboshoes on 8/18/15.
-//
-//
-
 #ifndef __Zwei__View__
 #define __Zwei__View__
 
 #include <stdio.h>
 #include <list>
 #include "Context.h"
+#include "MouseEvent.h"
 
 namespace zwei {
 
+    class Container;
+
     class View {
 
-    public:
+      public:
         View() : context( _context ), rotation( 0.0f ) {
             View::start( this );
         }
@@ -29,22 +24,33 @@ namespace zwei {
         cinder::vec2 position;
         float rotation;
 
+        virtual float getWidth();
+        virtual float getHeight();
+
+        virtual BoundingBox getBoundingBox() const;
+
         virtual void draw();
+
+        virtual void handleMouseEvent( zwei::MouseEvent event );
+
+        zwei::Container* getParent();
+        void setParent( zwei::Container* parent );
+
         static void tick();
 
-    protected:
+      protected:
         virtual void update();
         Context& context;
+        void adjustEvent( zwei::MouseEvent& event );
 
-    private:
-        void static start( View* view );
-        void static stop( View* view );
+      private:
+        static void start( View* view );
+        static void stop( View* view );
         static std::list<View*> views;
 
         Context _context;
+        zwei::Container* _parent = nullptr;
     };
-
-    using ViewRef = View*;
 }
 
 #endif /* defined(__Zwei__View__) */

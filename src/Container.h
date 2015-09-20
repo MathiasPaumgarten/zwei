@@ -14,20 +14,26 @@
 
 namespace zwei {
 
-    class Container : public View {
+    class Container : public zwei::View {
 
-    public:
+        using ViewPtr = zwei::View*;
 
-        ViewRef removeView( ViewRef view );
-        void addView( ViewRef view );
-        void draw();
+      public:
 
-    private:
-        std::list<ViewRef> children;
+        void addView( ViewPtr view );
+        ViewPtr removeView( ViewPtr view );
+        std::list<ViewPtr> removeAllViews();
+        void destroyAllViews();
+
+        void draw() override;
+
+        BoundingBox getBoundingBox() const override;
+
+        void handleMouseEvent( zwei::MouseEvent ) override;
+
+      private:
+        std::list<ViewPtr> children;
     };
-
-
-    using ContainerRef = Container*;
 }
 
 #endif /* defined(__Zwei__Container__) */

@@ -2,7 +2,7 @@
 #define __Zwei__Context__
 
 #include <stdio.h>
-#include "Style.h"
+#include "BoundingBox.h"
 
 namespace zwei {
 
@@ -12,7 +12,8 @@ namespace zwei {
         enum CommandType {
             DRAW_LINE,
             DRAW_RECT,
-            DRAW_CIRCLE
+            DRAW_CIRCLE,
+            SET_COLOR
         };
 
         Command( CommandType t, std::vector<float> args ) : type( t ), arguments( args ) {}
@@ -27,8 +28,6 @@ namespace zwei {
         const std::vector<float> arguments;
     };
 
-
-
     class Context {
 
       public:
@@ -37,12 +36,17 @@ namespace zwei {
         Context& setColor( cinder::Color color );
         Context& drawLine( cinder::vec2 start, cinder::vec2 end );
         Context& drawRect( cinder::vec2 position, cinder::vec2 size );
-        Context& drawCircle( cinder::vec2 circle, float radius );
+        Context& drawCircle( cinder::vec2 center, float radius );
+
+        const zwei::BoundingBox& getBoundingBox() { return boundingBox; };
 
         void apply() const;
 
       private:
+
         std::vector<Command> commands;
+
+        zwei::BoundingBox boundingBox;
     };
 
 }

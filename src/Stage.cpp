@@ -1,15 +1,10 @@
-//
-//  Stage.cpp
-//  Zwei
-//
-//  Created by roboshoes on 8/28/15.
-//
-//
-
 #include "Stage.h"
 
-void zwei::Stage::tick() {
+void zwei::Stage::draw() {
     cinder::gl::clear( backgroundColor );
+    zwei::Container::draw();
+}
 
-    Container::draw();
+void zwei::Stage::handleMouseEvent( cinder::app::MouseEvent event ) {
+    zwei::Container::handleMouseEvent( zwei::MouseEvent( &event ) );
 }
