@@ -62,7 +62,11 @@ void zwei::View::tick() {
 void zwei::View::update() {}
 
 void zwei::View::adjustEvent( zwei::MouseEvent &event ) {
-    cinder::mat3 transform = glm::translate( cinder::mat3{ 1 }, position * -1.f );
+    cinder::mat3 transform{ 1 };
+
+    transform = glm::translate( transform, position * -1.f );
+    transform = glm::rotate( transform, rotation * -1.f );
+
     event.transform( transform );
 }
 
