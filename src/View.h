@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 #include <list>
+
+#include "cinder/gl/gl.h"
+
 #include "Context.h"
 #include "MouseEvent.h"
 

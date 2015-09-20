@@ -2,6 +2,10 @@
 #define __Zwei__Stage__
 
 #include <stdio.h>
+
+#include "cinder/app/App.h"
+#include "cinder/Color.h"
+
 #include "Container.h"
 #include "MouseEvent.h"
 

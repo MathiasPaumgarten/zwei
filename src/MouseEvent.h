@@ -2,7 +2,9 @@
 #define __Zwei__MouseEvent__
 
 #include <stdio.h>
+
 #include "cinder/app/MouseEvent.h"
+#include "cinder/Matrix.h"
 
 namespace zwei {
 

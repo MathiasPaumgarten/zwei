@@ -2,6 +2,10 @@
 #define __Zwei__Context__
 
 #include <stdio.h>
+#include <vector>
+
+#include "cinder/Color.h"
+
 #include "BoundingBox.h"
 
 namespace zwei {
