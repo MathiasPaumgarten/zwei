@@ -18,8 +18,12 @@ namespace zwei {
         float getY() const { return position.y; }
         cinder::vec2 getPostion() const { return cinder::vec2( position ); }
 
-        void transform( cinder::mat3 matrix ) {
+        void transform( const cinder::mat3& matrix ) {
             position = matrix * position;
+        }
+
+        friend std::ostream& operator<<( std::ostream& stream, MouseEvent const & object ) {
+            return stream << "x: " << object.position.x << " y: " << object.position.y;
         }
 
       private:

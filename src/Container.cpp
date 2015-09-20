@@ -57,9 +57,15 @@ void zwei::Container::handleMouseEvent( zwei::MouseEvent event ) {
 
         BoundingBox childBoundingBox = ( *it )->getBoundingBox();
 
-        childBoundingBox.offset( ( *it )->position );
+        cinder::mat3 transform{ 1 };
 
-        if ( childBoundingBox.contains( point ) ) {
+        transform = glm::translate( transform, ( *it )->position * -1.f );
+        transform = glm::rotate( transform, ( *it )->rotation * -1 );
+
+        cinder::vec3 projectedPoint = cinder::vec3( point, 1 );
+        cinder::vec2 usePoint( transform * projectedPoint );
+
+        if ( childBoundingBox.contains( usePoint ) ) {
             ( *it )->handleMouseEvent( event );
         }
     }
