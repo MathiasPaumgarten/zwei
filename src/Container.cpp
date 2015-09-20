@@ -56,20 +56,21 @@ void zwei::Container::handleMouseEvent( zwei::MouseEvent event ) {
     for( auto it = children.begin(); it != children.end(); it++ ) {
 
         BoundingBox childBoundingBox = ( *it )->getBoundingBox();
+		
+		( *it )->handleMouseEvent( event );
 
-        cinder::mat3 transform{ 1 };
+        /*cinder::mat3 transform{ 1 };
 
         transform = glm::translate( transform, ( *it )->position * -1.f );
-        transform = glm::rotate( transform, ( *it )->rotation * -1 );
+        transform = glm::rotate( transform, ( *it )->rotation * -1.f );
 
         cinder::vec3 projectedPoint = cinder::vec3( point, 1 );
         cinder::vec2 usePoint( transform * projectedPoint );
 
         if ( childBoundingBox.contains( usePoint ) ) {
-            ( *it )->handleMouseEvent( event );
-        }
+			( *it )->handleMouseEvent( event );
+        }*/
     }
-
 }
 
 std::list<ViewPtr> zwei::Container::removeAllViews() {

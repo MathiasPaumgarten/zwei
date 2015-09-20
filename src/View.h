@@ -27,8 +27,8 @@ namespace zwei {
         cinder::vec2 position;
         float rotation;
 
-        virtual float getWidth();
-        virtual float getHeight();
+        virtual float getWidth() const;
+        virtual float getHeight() const;
 
         virtual BoundingBox getBoundingBox() const;
 

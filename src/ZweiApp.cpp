@@ -1,9 +1,11 @@
+#include <math.h>
+
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
+
 #include "Bar.h"
 #include "Stage.h"
-#include <math.h>
 
 using namespace ci;
 using namespace ci::app;

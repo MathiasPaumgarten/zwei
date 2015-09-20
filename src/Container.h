@@ -1,15 +1,8 @@
-//
-//  Container.h
-//  Zwei
-//
-//  Created by roboshoes on 8/18/15.
-//
-//
-
 #ifndef __Zwei__Container__
 #define __Zwei__Container__
 
 #include <stdio.h>
+#include <list>
 #include "View.h"
 
 namespace zwei {
@@ -26,6 +19,10 @@ namespace zwei {
         void destroyAllViews();
 
         void draw() override;
+
+		// Todo: implement those
+		float getWidth() const override { return zwei::View::getWidth(); }
+		float getHeight() const override { return zwei::View::getHeight(); }
 
         BoundingBox getBoundingBox() const override;
 

@@ -1,11 +1,3 @@
-//
-//  Foo.h
-//  Zwei
-//
-//  Created by roboshoes on 8/28/15.
-//
-//
-
 #ifndef __Zwei__Foo__
 #define __Zwei__Foo__
 

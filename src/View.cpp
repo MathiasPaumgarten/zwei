@@ -1,7 +1,6 @@
 #include "View.h"
 
-
-float zwei::View::getWidth() {
+float zwei::View::getWidth() const {
     auto boundingBox = context.getBoundingBox();
 
     if ( boundingBox.getX() > 0 ) {
@@ -13,7 +12,7 @@ float zwei::View::getWidth() {
     return boundingBox.getWidth();
 }
 
-float zwei::View::getHeight() {
+float zwei::View::getHeight() const {
     auto boundingBox = context.getBoundingBox();
 
     if ( boundingBox.getY() > 0 ) {
