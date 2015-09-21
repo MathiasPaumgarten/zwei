@@ -18,7 +18,6 @@ namespace zwei {
         Stage() : backgroundColor( cinder::Color( 255, 255, 255 ) ) {}
         Stage( Stage const& ) = delete;
         void operator=( Stage const& ) = delete;
-        cinder::app::App* app;
 
       public:
 
@@ -28,15 +27,7 @@ namespace zwei {
             return instance;
         }
 
-        void handleMouseEvent( cinder::app::MouseEvent event );
-
-        void setApp( cinder::app::App* a ) {
-            app = a;
-        }
-
-        const cinder::app::App* getApp() const {
-            return app;
-        }
+        bool findMouseEventTarget( zwei::MouseEvent::Type type, cinder::app::MouseEvent event );
 
         cinder::Color backgroundColor;
 

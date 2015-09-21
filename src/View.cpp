@@ -40,11 +40,37 @@ void zwei::View::draw() {
     cinder::gl::popMatrices();
 }
 
-void zwei::View::handleMouseEvent( zwei::MouseEvent event ) {
+bool zwei::View::findMouseEventTarget( zwei::MouseEvent event ) {
     adjustEvent( event );
+
+    if ( ! getBoundingBox().contains( event.getPostion() ) ) return false;
+
+    callEvent( event );
+
+    return true;
 }
 
-zwei::Container* zwei::View::getParent() {
+void zwei::View::callEvent( zwei::MouseEvent& event ) {
+    event.setTarget( this );
+
+    switch ( event.getType() ) {
+        case zwei::MouseEvent::DOWN:
+            onMouseDown( event );
+            break;
+        case zwei::MouseEvent::UP:
+            onMouseUp( event );
+            break;
+        case zwei::MouseEvent::MOVE:
+            onMouseMove( event );
+            break;
+    }
+
+    if ( event.getBubbling() && _parent != nullptr ) {
+        ( (zwei::View*) _parent )->callEvent( event );
+    }
+}
+
+zwei::Container* zwei::View::getParent() const {
     return _parent;
 }
 
@@ -60,11 +86,11 @@ void zwei::View::tick() {
 
 void zwei::View::update() {}
 
-void zwei::View::adjustEvent( zwei::MouseEvent &event ) {
+void zwei::View::adjustEvent( zwei::MouseEvent &event ) const {
     cinder::mat3 transform{ 1 };
 
-    transform = glm::translate( transform, position * -1.f );
     transform = glm::rotate( transform, rotation * -1.f );
+    transform = glm::translate( transform, position * -1.f );
 
     event.transform( transform );
 }

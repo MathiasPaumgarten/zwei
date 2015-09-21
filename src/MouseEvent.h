@@ -8,11 +8,25 @@
 
 namespace zwei {
 
+    class View;
+
     class MouseEvent {
       public:
-        MouseEvent( cinder::app::MouseEvent* e ) :
+
+        enum Type {
+            DOWN,
+            UP,
+            MOVE
+        };
+
+        MouseEvent( cinder::app::MouseEvent* e, Type t, bool bubbles = true ) :
             originalEvent( e ),
-            position( cinder::vec3( e->getX(), e->getY(), 1 ) )
+            position( cinder::vec3( e->getPos(), 1 ) ),
+            isActive( true ),
+            isBubbling( bubbles ),
+            type( t ),
+            target( nullptr ),
+            currentTarget( nullptr )
             {}
 
         const cinder::app::MouseEvent* getOriginalEvent() const { return originalEvent; }
@@ -28,10 +42,32 @@ namespace zwei {
             return stream << "x: " << object.position.x << " y: " << object.position.y;
         }
 
+        void stopPropagation();
+        void stopImmediatePropagation();
+
+        void setTarget( zwei::View* t ) { if ( target == nullptr ) target = t; }
+        const zwei::View* getTarget() { return target; }
+
+        void setCurrentTarget( zwei::View* t ) { currentTarget = t; }
+        const zwei::View* getCurrentTarget() { return currentTarget; };
+
+        Type getType() const { return type; }
+
+        bool getBubbling() const { return isBubbling; }
+        bool getActive() const { return isActive; }
+
       private:
         const cinder::app::MouseEvent* originalEvent;
 
+        zwei::View* target;
+        zwei::View* currentTarget;
+
         cinder::vec3 position;
+
+        bool isActive;
+        bool isBubbling;
+
+        Type type;
     };
 }
 

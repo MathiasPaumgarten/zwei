@@ -3,9 +3,12 @@
 
 #include <stdio.h>
 #include <list>
+
 #include "View.h"
 
 namespace zwei {
+
+    class View;
 
     class Container : public zwei::View {
 
@@ -26,7 +29,7 @@ namespace zwei {
 
         BoundingBox getBoundingBox() const override;
 
-        void handleMouseEvent( zwei::MouseEvent ) override;
+        bool findMouseEventTarget( zwei::MouseEvent ) override;
 
       private:
         std::list<ViewPtr> children;

@@ -5,6 +5,6 @@ void zwei::Stage::draw() {
     zwei::Container::draw();
 }
 
-void zwei::Stage::handleMouseEvent( cinder::app::MouseEvent event ) {
-    zwei::Container::handleMouseEvent( zwei::MouseEvent( &event ) );
+bool zwei::Stage::findMouseEventTarget( zwei::MouseEvent::Type type, cinder::app::MouseEvent event ) {
+    return zwei::Container::findMouseEventTarget( zwei::MouseEvent( &event, type ) );
 }

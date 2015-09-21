@@ -16,7 +16,7 @@ namespace zwei {
     class View {
 
       public:
-        View() : context( _context ), rotation( 0.0f ) {
+        View() : context( _context ), rotation( 0.0f ), position( 0 ) {
             View::start( this );
         }
 
@@ -34,17 +34,25 @@ namespace zwei {
 
         virtual void draw();
 
-        virtual void handleMouseEvent( zwei::MouseEvent event );
+        virtual bool findMouseEventTarget( zwei::MouseEvent event );
 
-        zwei::Container* getParent();
+        zwei::Container* getParent() const;
         void setParent( zwei::Container* parent );
+
+        virtual void callEvent( zwei::MouseEvent& event ); 
 
         static void tick();
 
       protected:
+
+        virtual void onMouseDown( zwei::MouseEvent& event ) {}
+        virtual void onMouseUp( zwei::MouseEvent& event ) {}
+        virtual void onMouseMove( zwei::MouseEvent& event ) {}
+
         virtual void update();
+        void adjustEvent( zwei::MouseEvent& event ) const;
+
         Context& context;
-        void adjustEvent( zwei::MouseEvent& event );
 
       private:
         static void start( View* view );

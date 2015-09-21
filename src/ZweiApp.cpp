@@ -21,13 +21,12 @@ class ZweiApp : public App {
 
     void mouseDown( MouseEvent event ) override;
     void mouseUp( MouseEvent event ) override;
+    void mouseMove( MouseEvent event ) override;
 
     zwei::Stage& stage = zwei::Stage::getStage();
 };
 
 void ZweiApp::setup() {
-    stage.setApp( this );
-
     start();
 }
 
@@ -40,11 +39,15 @@ void ZweiApp::draw() {
 }
 
 void ZweiApp::mouseDown( MouseEvent event ) {
-    stage.handleMouseEvent( event );
+    stage.findMouseEventTarget( zwei::MouseEvent::Type::DOWN, event );
 }
 
 void ZweiApp::mouseUp( MouseEvent event ) {
-//    stage.handleMouseEvent( event );
+    stage.findMouseEventTarget( zwei::MouseEvent::Type::UP, event );
+}
+
+void ZweiApp::mouseMove( MouseEvent event ) {
+    stage.findMouseEventTarget( zwei::MouseEvent::Type::MOVE, event );
 }
 
 

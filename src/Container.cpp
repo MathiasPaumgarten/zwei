@@ -44,33 +44,27 @@ zwei::BoundingBox zwei::Container::getBoundingBox() const {
         boundingBox += b;
     }
 
+    boundingBox += context.getBoundingBox();
+
     return boundingBox;
 }
 
-void zwei::Container::handleMouseEvent( zwei::MouseEvent event ) {
+bool zwei::Container::findMouseEventTarget( zwei::MouseEvent event ) {
 
     adjustEvent( event );
 
-    cinder::vec2 point = event.getPostion();
-
     for( auto it = children.begin(); it != children.end(); it++ ) {
 
-        BoundingBox childBoundingBox = ( *it )->getBoundingBox();
-		
-		( *it )->handleMouseEvent( event );
+		if ( ( *it )->findMouseEventTarget( event ) ) return true;
 
-        /*cinder::mat3 transform{ 1 };
-
-        transform = glm::translate( transform, ( *it )->position * -1.f );
-        transform = glm::rotate( transform, ( *it )->rotation * -1.f );
-
-        cinder::vec3 projectedPoint = cinder::vec3( point, 1 );
-        cinder::vec2 usePoint( transform * projectedPoint );
-
-        if ( childBoundingBox.contains( usePoint ) ) {
-			( *it )->handleMouseEvent( event );
-        }*/
     }
+
+    if ( context.getBoundingBox().contains( event.getPostion() ) ) {
+        callEvent( event );
+        return true;
+    }
+
+    return false;
 }
 
 std::list<ViewPtr> zwei::Container::removeAllViews() {

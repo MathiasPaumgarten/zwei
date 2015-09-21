@@ -12,8 +12,9 @@ class Foo : public zwei::View {
         context.drawRect( cinder::vec2( 0 ), cinder::vec2( 100, 20 ) );
     }
 
-    void handleMouseEvent( zwei::MouseEvent event ) {
-        std::cout << index << " -> " << event << std::endl;
+  protected:
+    void onMouseDown( zwei::MouseEvent& event ) override {
+        std::cout << event.getTarget() << std::endl;
     }
 
   private:
