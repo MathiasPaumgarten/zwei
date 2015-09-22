@@ -19,6 +19,14 @@ namespace zwei {
             MOVE
         };
 
+        inline static const char* toString( Type v ) {
+            switch ( v ) {
+                case DOWN:   return "DOWN";
+                case UP:   return "UP";
+                case MOVE: return "MOVE";
+            }
+        }
+
         MouseEvent( cinder::app::MouseEvent* e, Type t, bool bubbles = true ) :
             originalEvent( e ),
             position( cinder::vec3( e->getPos(), 1 ) ),
@@ -39,7 +47,7 @@ namespace zwei {
         }
 
         friend std::ostream& operator<<( std::ostream& stream, MouseEvent const & object ) {
-            return stream << "x: " << object.position.x << " y: " << object.position.y;
+            return stream << toString( object.type ) << " x: " << object.position.x << " y: " << object.position.y;
         }
 
         void stopPropagation();
@@ -66,6 +74,7 @@ namespace zwei {
 
         bool isActive;
         bool isBubbling;
+
 
         Type type;
     };

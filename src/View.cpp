@@ -55,13 +55,13 @@ void zwei::View::callEvent( zwei::MouseEvent& event ) {
 
     switch ( event.getType() ) {
         case zwei::MouseEvent::DOWN:
-            onMouseDown( event );
+            mouseDownSignal( event );
             break;
         case zwei::MouseEvent::UP:
-            onMouseUp( event );
+            mouseUpSignal( event );
             break;
         case zwei::MouseEvent::MOVE:
-            onMouseMove( event );
+            mouseMoveSignal( event );
             break;
     }
 

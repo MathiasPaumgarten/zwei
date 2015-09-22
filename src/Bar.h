@@ -21,10 +21,6 @@ class Bar : public zwei::Container {
         }
     }
 
-    void onMouseDown( zwei::MouseEvent& event ) override {
-        std::cout << event.getTarget() << std::endl;
-    }
-
     ~Bar() {
         destroyAllViews();
     }

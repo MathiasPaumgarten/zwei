@@ -18,7 +18,7 @@ void Context::apply() const {
                 cinder::gl::drawSolidRect( cinder::Rectf( argsRef[ 0 ], argsRef[ 1 ], argsRef[ 2 ], argsRef[ 3 ] ) );
                 break;
             case Command::DRAW_CIRCLE:
-                cinder::gl::drawSolidCircle(cinder::vec2( argsRef[ 0 ], argsRef[ 1 ] ), argsRef[ 2 ] );
+                cinder::gl::drawSolidCircle( cinder::vec2( argsRef[ 0 ], argsRef[ 1 ] ), argsRef[ 2 ] );
                 break;
             case Command::SET_COLOR:
                 cinder::gl::color( cinder::Color( argsRef[ 0 ], argsRef[ 1 ], argsRef[ 2 ] ) );

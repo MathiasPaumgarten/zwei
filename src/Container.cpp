@@ -55,7 +55,7 @@ bool zwei::Container::findMouseEventTarget( zwei::MouseEvent event ) {
 
     for( auto it = children.begin(); it != children.end(); it++ ) {
 
-		if ( ( *it )->findMouseEventTarget( event ) ) return true;
+		if ( ( *it )->getMouseEnabled() && ( *it )->findMouseEventTarget( event ) ) return true;
 
     }
 

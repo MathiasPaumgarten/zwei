@@ -44,7 +44,7 @@ namespace zwei {
         Context& drawRect( cinder::vec2 position, cinder::vec2 size );
         Context& drawCircle( cinder::vec2 center, float radius );
 
-        const zwei::BoundingBox& getBoundingBox() { return boundingBox; };
+        const zwei::BoundingBox& getBoundingBox() const { return boundingBox; };
 
         void apply() const;
 

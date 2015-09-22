@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <list>
+#include <boost/signals2.hpp>
 
 #include "cinder/gl/gl.h"
 
@@ -16,12 +17,27 @@ namespace zwei {
     class View {
 
       public:
-        View() : context( _context ), rotation( 0.0f ), position( 0 ) {
+        View() :
+            context( _context ),
+            rotation( 0.f ),
+            position( 0 ),
+            opacity( 1.f),
+            mouseEnabled( true )
+            {
+
             View::start( this );
+
+            mouseDownSignal.connect( std::bind( &View::onMouseDown, this, std::placeholders::_1 ) );
+            mouseUpSignal.connect( std::bind( &View::onMouseUp, this, std::placeholders::_1 ) );
+            mouseMoveSignal.connect( std::bind( &View::onMouseMove, this, std::placeholders::_1 ) );
         }
 
         ~View() {
             View::stop( this );
+
+            mouseDownSignal.disconnect_all_slots();
+            mouseUpSignal.disconnect_all_slots();
+            mouseMoveSignal.disconnect_all_slots();
         }
 
         cinder::vec2 position;
@@ -29,6 +45,12 @@ namespace zwei {
 
         virtual float getWidth() const;
         virtual float getHeight() const;
+
+        void setMouseEnabled( bool value ) { mouseEnabled = value; }
+        bool getMouseEnabled() const { return mouseEnabled; }
+
+        float getOpacity() const { return opacity; }
+        void setOpacity( float value ) { opacity = value; }
 
         virtual BoundingBox getBoundingBox() const;
 
@@ -42,6 +64,10 @@ namespace zwei {
         virtual void callEvent( zwei::MouseEvent& event ); 
 
         static void tick();
+
+        boost::signals2::signal<void (zwei::MouseEvent&)> mouseDownSignal;
+        boost::signals2::signal<void (zwei::MouseEvent&)> mouseUpSignal;
+        boost::signals2::signal<void (zwei::MouseEvent&)> mouseMoveSignal;
 
       protected:
 
@@ -61,6 +87,10 @@ namespace zwei {
 
         Context _context;
         zwei::Container* _parent = nullptr;
+
+        bool mouseEnabled;
+
+        float opacity;
     };
 }
 
