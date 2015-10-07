@@ -3,7 +3,7 @@
 using Command = zwei::Command;
 using vectorf = std::vector<float>;
 
-void zwei::Context::apply() const {
+void zwei::Context::apply( float opacity ) const {
 
     for ( auto it = commands.begin(); it != commands.end(); ++it ) {
         const std::vector<float>& argsRef = it->getArguments();
@@ -19,15 +19,15 @@ void zwei::Context::apply() const {
                 cinder::gl::drawSolidCircle( cinder::vec2( argsRef[ 0 ], argsRef[ 1 ] ), argsRef[ 2 ] );
                 break;
             case Command::SET_COLOR:
-                cinder::gl::color( cinder::Color( argsRef[ 0 ], argsRef[ 1 ], argsRef[ 2 ] ) );
+                cinder::gl::color( cinder::ColorA( argsRef[ 0 ], argsRef[ 1 ], argsRef[ 2 ], argsRef[ 3 ] * opacity ) );
                 break;
         }
     }
 }
 
-zwei::Context& zwei::Context::setColor( cinder::Color color ) {
+zwei::Context& zwei::Context::setColor( cinder::ColorA color ) {
 
-    commands.push_back( Command( Command::SET_COLOR, vectorf{ color.r, color.g, color.b } ) );
+    commands.push_back( Command( Command::SET_COLOR, vectorf{ color.r, color.g, color.b, color.a } ) );
 
     return *this;
 }

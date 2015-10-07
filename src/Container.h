@@ -21,7 +21,7 @@ namespace zwei {
         std::list<ViewPtr> removeAllViews();
         void destroyAllViews();
 
-        void draw() override;
+        void draw( float opacityFactor ) override;
 
 		// Todo: implement those
 		float getWidth() const override { return zwei::View::getWidth(); }

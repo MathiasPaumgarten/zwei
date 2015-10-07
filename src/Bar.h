@@ -14,6 +14,7 @@ class Bar : public zwei::Container {
         for ( int i = 0; i < 5; i++ ) {
             Foo* line = new Foo( i );
             line->position.y = position;
+			line->setOpacity( i == 2 ? 0.5 : 1.0 );
 
             position += line->getHeight() + 2;
 
