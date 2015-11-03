@@ -1,6 +1,7 @@
 #include "Stage.h"
 
-void zwei::Stage::draw( float opacity ) const {
+
+void zwei::Stage::draw( float opacity ) {
     cinder::gl::clear( backgroundColor );
     zwei::Container::draw( opacity );
 }

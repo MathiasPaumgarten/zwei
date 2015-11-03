@@ -39,14 +39,15 @@ namespace zwei {
       public:
         Context() {};
 
-        Context& setColor( cinder::Color color );
+        Context& setColor( cinder::ColorA color );
         Context& drawLine( cinder::vec2 start, cinder::vec2 end );
         Context& drawRect( cinder::vec2 position, cinder::vec2 size );
         Context& drawCircle( cinder::vec2 center, float radius );
+		Context& drawPolyShape();
 
         const zwei::BoundingBox& getBoundingBox() const { return boundingBox; };
 
-        void apply() const;
+        void apply( float opacity = 1.f ) const;
 
       private:
 
