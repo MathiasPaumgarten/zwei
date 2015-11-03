@@ -19,7 +19,7 @@ void zwei::Container::addView( ViewPtr view ) {
     children.push_back( view );
 }
 
-void zwei::Container::draw() {
+void zwei::Container::draw( float opacity ) const {
     cinder::gl::pushMatrices();
     cinder::gl::translate( position );
     cinder::gl::rotate( rotation );
@@ -27,7 +27,7 @@ void zwei::Container::draw() {
     context.apply();
 
     for ( auto iterator = children.begin(); iterator != children.end(); ++iterator ) {
-        (*iterator)->draw();
+        (*iterator)->draw( opacity );
     }
 
     cinder::gl::popMatrices();
@@ -55,7 +55,7 @@ bool zwei::Container::findMouseEventTarget( zwei::MouseEvent event ) {
 
     for( auto it = children.begin(); it != children.end(); it++ ) {
 
-		if ( ( *it )->getMouseEnabled() && ( *it )->findMouseEventTarget( event ) ) return true;
+        if ( ( *it )->getMouseEnabled() && ( *it )->findMouseEventTarget( event ) ) return true;
 
     }
 

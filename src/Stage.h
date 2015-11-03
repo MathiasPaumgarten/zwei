@@ -31,7 +31,7 @@ namespace zwei {
 
         cinder::Color backgroundColor;
 
-        void draw() override;
+        void draw( float opacity = 1.f ) const override;
     };
 
 }

@@ -54,7 +54,7 @@ namespace zwei {
 
         virtual BoundingBox getBoundingBox() const;
 
-        virtual void draw();
+        virtual void draw( float opacity ) const;
 
         virtual bool findMouseEventTarget( zwei::MouseEvent event );
 

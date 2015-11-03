@@ -21,11 +21,11 @@ namespace zwei {
         std::list<ViewPtr> removeAllViews();
         void destroyAllViews();
 
-        void draw() override;
+        void draw( float opacity ) const override;
 
-		// Todo: implement those
-		float getWidth() const override { return zwei::View::getWidth(); }
-		float getHeight() const override { return zwei::View::getHeight(); }
+        // Todo: implement those
+        float getWidth() const override { return zwei::View::getWidth(); }
+        float getHeight() const override { return zwei::View::getHeight(); }
 
         BoundingBox getBoundingBox() const override;
 
