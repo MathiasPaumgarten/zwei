@@ -5,6 +5,7 @@
 #include <list>
 
 #include "View.h"
+#include "RenderData.h"
 
 namespace zwei {
 
@@ -21,7 +22,7 @@ namespace zwei {
         std::list<ViewPtr> removeAllViews();
         void destroyAllViews();
 
-        void draw( float opacityFactor ) override;
+        void draw( const zwei::RenderData renderData ) override;
 
         // Todo: implement those
         float getWidth() const override { return zwei::View::getWidth(); }

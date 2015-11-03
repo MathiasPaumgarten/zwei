@@ -9,6 +9,7 @@
 
 #include "Context.h"
 #include "MouseEvent.h"
+#include "RenderData.h"
 
 namespace zwei {
 
@@ -21,7 +22,8 @@ namespace zwei {
             context( _context ),
             rotation( 0.f ),
             position( 0 ),
-            opacity( 1.f),
+            scale( 1.0f ),
+            opacity( 1.f ),
             mouseEnabled( true )
             {
 
@@ -52,9 +54,11 @@ namespace zwei {
         float getOpacity() const { return opacity; }
         void setOpacity( float value ) { opacity = value; }
 
+        cinder::vec2 getScale() const { return scale; }
+
         virtual BoundingBox getBoundingBox() const;
 
-        virtual void draw( float opacityFactor );
+        virtual void draw( const zwei::RenderData renderData );
 
         virtual bool findMouseEventTarget( zwei::MouseEvent event );
 
@@ -91,6 +95,7 @@ namespace zwei {
         bool mouseEnabled;
 
         float opacity;
+        cinder::vec2 scale;
     };
 }
 

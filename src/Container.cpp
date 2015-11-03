@@ -19,17 +19,19 @@ void zwei::Container::addView( ViewPtr view ) {
     children.push_back( view );
 }
 
-void zwei::Container::draw( float opacityFactor ) {
+void zwei::Container::draw( const zwei::RenderData renderData ) {
     cinder::gl::pushMatrices();
     cinder::gl::translate( position );
     cinder::gl::rotate( rotation );
 
-	float opacity = opacityFactor * getOpacity();
+	float opacity = renderData.getOpacity() * getOpacity();
 
     context.apply( opacity );
 
+    renderData.update( getOpacity(), getScale() );
+
     for ( auto iterator = children.begin(); iterator != children.end(); ++iterator ) {
-        ( *iterator )->draw( opacity );
+        ( *iterator )->draw( renderData );
     }
 
     cinder::gl::popMatrices();

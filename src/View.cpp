@@ -30,12 +30,12 @@ zwei::BoundingBox zwei::View::getBoundingBox() const {
     return boundingBox;
 }
 
-void zwei::View::draw( float opacityFactor ) {
+void zwei::View::draw( const zwei::RenderData renderData ) {
     cinder::gl::pushMatrices();
     cinder::gl::translate( position );
     cinder::gl::rotate( rotation );
 
-    context.apply( opacity * opacityFactor );
+    context.apply( opacity * renderData.getOpacity() );
 
     cinder::gl::popMatrices();
 }
